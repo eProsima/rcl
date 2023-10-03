@@ -395,6 +395,7 @@ rcl_publish_serialized_message(
  *
  * \param[in] publisher handle to the publisher which will do the publishing
  * \param[in] ros_message  pointer to the previously borrow loaned message
+ * \param[in] return_loan  whether the loan should be returned to the middleware
  * \param[in] allocation structure pointer, used for memory preallocation (may be NULL)
  * \return #RCL_RET_OK if the message was published successfully, or
  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
@@ -408,6 +409,7 @@ rcl_ret_t
 rcl_publish_loaned_message(
   const rcl_publisher_t * publisher,
   void * ros_message,
+  bool return_loan,
   rmw_publisher_allocation_t * allocation);
 
 /// Manually assert that this Publisher is alive (for RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_TOPIC)

@@ -279,13 +279,14 @@ rcl_ret_t
 rcl_publish_loaned_message(
   const rcl_publisher_t * publisher,
   void * ros_message,
+  bool return_loan,
   rmw_publisher_allocation_t * allocation)
 {
   if (!rcl_publisher_is_valid(publisher)) {
     return RCL_RET_PUBLISHER_INVALID;  // error already set
   }
   RCL_CHECK_ARGUMENT_FOR_NULL(ros_message, RCL_RET_INVALID_ARGUMENT);
-  rmw_ret_t ret = rmw_publish_loaned_message(publisher->impl->rmw_handle, ros_message, allocation);
+  rmw_ret_t ret = rmw_publish_loaned_message(publisher->impl->rmw_handle, ros_message, return_loan, allocation);
   if (ret != RMW_RET_OK) {
     RCL_SET_ERROR_MSG(rmw_get_error_string().str);
     return RCL_RET_ERROR;
